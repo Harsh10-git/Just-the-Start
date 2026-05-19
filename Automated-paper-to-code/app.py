@@ -61,7 +61,7 @@ with col_b:
     sample_clicked = st.button("Use Sample PDF", use_container_width=True)
 
 if sample_clicked:
-    sample_path = "samples/sample_paper.pdf"
+    sample_path = os.path.join(os.path.dirname(__file__), "samples/sample_paper.pdf")
     if os.path.exists(sample_path):
         with open(sample_path, "rb") as f:
             st.session_state.sample_pdf_bytes = f.read()
