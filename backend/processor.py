@@ -28,9 +28,10 @@ def _clean_code_response(result_text: str) -> str:
 
     text = result_text.strip()
 
+    # Fixed the string/list boundary checking here
     if text.startswith("```"):
         lines = text.splitlines()
-        if lines and lines.startswith("```"):
+        if lines and lines[0].startswith("```"):
             lines = lines[1:]
         if lines and lines[-1].startswith("```"):
             lines = lines[:-1]
@@ -50,8 +51,8 @@ def generate_code_from_text(paper_text: str, api_key: str) -> str:
         # Configure the API key
         genai.configure(api_key=api_key.strip())
 
-        # Create the model (use a real model code; 2.5‑flash is still in preview)
-        model = genai.GenerativeModel("gemini-1.5-flash")  # or whatever you want
+        # Using the standard stable model for text generation
+        model = genai.GenerativeModel("gemini-1.5-flash")
 
         prompt = f"""
 You are an expert Python engineer.
