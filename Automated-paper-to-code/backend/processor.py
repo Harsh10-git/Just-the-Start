@@ -1,6 +1,6 @@
 import os
 import pdfplumber
-from google import genai
+import google.generativeai as genai
 
 
 def extract_text_from_pdf(pdf_file) -> str:
@@ -39,7 +39,7 @@ def _clean_code_response(result_text: str) -> str:
     return text
 
 
-def generate_code_from_text(paper_text: str, api_key: str) -> str:
+ def generate_code_from_text(paper_text: str, api_key: str) -> str:
     """
     Send extracted paper text to Gemini to generate Python code.
     """
@@ -47,7 +47,11 @@ def generate_code_from_text(paper_text: str, api_key: str) -> str:
         raise ValueError("GOOGLE_API_KEY is missing from environment variables.")
 
     try:
-        client = genai.Client(api_key=api_key.strip())
+        # Configure the API key
+        genai.configure(api_key=api_key.strip())
+
+        # Create the model (use a real model code; 2.5‑flash is still in preview)
+        model = genai.GenerativeModel("gemini-1.5-flash")  # or whatever you want
 
         prompt = f"""
 You are an expert Python engineer.
@@ -65,10 +69,8 @@ Research paper text:
 {paper_text[:200000]}
 """
 
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
-        )
+        # Generate content
+        response = model.generate_content(prompt)
 
         result_text = response.text or ""
         return _clean_code_response(result_text)
