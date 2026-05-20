@@ -52,7 +52,7 @@ def generate_code_from_text(paper_text: str, api_key: str) -> str:
         genai.configure(api_key=api_key.strip())
 
         # Using the standard stable model for text generation
-        model = genai.GenerativeModel("gemini-1.5-flash-latest")
+        model = genai.GenerativeModel("gemini-pro")
 
         prompt = f"""
 You are an expert Python engineer.
