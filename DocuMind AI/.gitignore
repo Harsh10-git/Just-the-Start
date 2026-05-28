@@ -1,0 +1,18 @@
+```text
+#virtual Enviromment files
+venv/
+.venv/
+env/
+
+#Vector database local storage
+chrome_db/
+
+#temporary uploaded files cache
+temp_docs/
+
+# Pyton caching
+__pycache__/
+*.pyc
+
+# Local envoromment secret variables
+.env
