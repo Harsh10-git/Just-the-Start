@@ -49,7 +49,7 @@ def process_pdf_document(file_path: str, doc_id: str):
     for idx, chunk in enumerate(chunks):
         # Generate semantic vector weights using Google's text-embedding model
         response = client.models.embed_content(
-            model="text-embedding-004", contents=chunk
+            model="gemini-embedding-2", contents=chunk
         )
         vector_embedding = response.embeddings[0].values
 
@@ -70,7 +70,7 @@ def query_knowledge_base(user_query: str) -> str:
     """
     # Convert the user's incoming question into a math vector
     query_vector_resp = client.models.embed_content(
-        model="text-embedding-004", contents=user_query
+        model="gemini-embedding-2", contents=user_query
     )
     query_vector = query_vector_resp.embeddings[0].values
 
