@@ -1,0 +1,22 @@
+# Secret Environment Variables (CRITICAL: Keeps your Gemini API key safe)
+.env
+
+# Local Vector Database Files (Keeps your parsed PDF data private)
+chroma_data/
+temp_storage/
+
+# Python Virtual Environment
+venv/
+ENV/
+env/
+
+# Python Cache files (Generated automatically when you run scripts)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Operating System Specific Files
+.DS_Store
+Thumbless.db
